@@ -9,6 +9,7 @@
   extern int yyparse();
   int sym[26];
   void yyerror( char *s);
+
 %}
 
 
@@ -25,7 +26,7 @@ program:
     ;
     
 statement:
-     expr    {printf("%d\n", $1);}
+     expr    {printf("Respuesta: %d\n", $1); std::cout<<"Ingrese la expresion:\n";}
      |VARIABLE  '=' expr    {sym[$1] = $3;}
 ;
 expr: 
@@ -41,11 +42,20 @@ expr:
 
 int main(int, char**) {
 
- yyparse();
+do{
+  std::cout<<"----Analizador lexico y sintactico----\n";
+  std::cout<<"--Calculos validos: Suma, resta, multiplicacion, division y potencia)\n";
+  std::cout<<"--Presiona Ctrl + C paara finalizar\n";
+  std::cout<<"Ingrese la expresion:\n";
+  yyparse();
+}while(true);
+
 return 0;
   
 }
+
+
 void yyerror( char *s) {
-  cout << "Error" << s << endl;
+  cout << "Error " << s << endl;
   exit(-1);
 }
